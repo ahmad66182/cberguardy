@@ -38,7 +38,7 @@ function toggleFaq(element) {
 }
 
 // ============ CONTACT FORM WITH AJAX ============
-const WEBSITE_API_URL = 'http://localhost:5001'; // Change to your domain in production
+const WEBSITE_API_URL = '';
 
 function validateName(input) {
   input.value = input.value.replace(/[^a-zA-Z\s]/g, '');
