@@ -1,17 +1,17 @@
 {
   "functions": {
-    "contact_handler.py": {
+    "api/index.py": {
       "runtime": "@vercel/python@4.0.0"
     }
   },
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "contact_handler.py"
+      "dest": "api/index.py"
     },
     {
       "src": "/(.*)",
-      "dest": "contact_handler.py"
+      "dest": "api/index.py"
     }
   ]
 }
