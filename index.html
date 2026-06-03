@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>CyberGuard — Professional Laptop Recovery Service</title>
+  
+  <!-- Favicon / Browser Tab Logo -->
+  <link rel="icon" type="image/svg+xml" href="cyberguard_icon.svg">
+  <link rel="shortcut icon" type="image/svg+xml" href="cyberguard_icon.svg">
+  <link rel="apple-touch-icon" href="cyberguard_icon.svg">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+ 
+  <meta name="description" content="Professional laptop recovery and anti-theft protection service. Evidence collection, location tracking, and law enforcement support.">
+  <meta name="theme-color" content="#2d7aff">
+ 
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* Mobile Responsive Fixes */
+    @media (max-width: 768px) {
+      /* Fix navigation on mobile */
+      #nav {
+        padding: 8px 1rem !important;
+        height: auto !important;
+        min-height: 68px;
+      }
+      
+      .nav-logo {
+        gap: 8px !important;
+      }
+      
+      .nav-logo .logo-mark {
+        display: none !important;
+      }
+      
+      .nav-logo span {
+        margin-left: 0 !important;
+        font-size: 1.3rem !important;
+      }
+      
+      /* Fix hero section */
+      .hero {
+        padding: 6rem 1rem 3rem !important;
+      }
+      
+      .hero-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+        text-align: center !important;
+      }
+      
+      .hero-content p {
+        margin: 0 auto 1.5rem auto !important;
+      }
+      
+      .hero-content .btn {
+        justify-content: center !important;
+      }
+      
+      /* Fix stats bar */
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+      }
+      
+      .stats-bar {
+        padding: 1.5rem 1rem !important;
+      }
+      
+      /* Fix containers */
+      .container {
+        padding: 0 1rem !important;
+      }
+      
+      .section {
+        padding: 3rem 0 !important;
+      }
+      
+      /* Fix service grid */
+      .service-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+      
+      .service-card {
+        padding: 1.5rem !important;
+      }
+      
+      /* Fix grid layouts */
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+      
+      /* Fix process steps */
+      .process-steps {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+      
+      /* Fix contact wrapper */
+      .contact-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+      
+      /* Fix footer */
+      .footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        text-align: center !important;
+      }
+      
+      .footer-bottom {
+        flex-direction: column !important;
+        text-align: center !important;
+      }
+      
+      /* Fix cards */
+      .card {
+        padding: 1.5rem !important;
+      }
+      
+      /* Fix CTA section */
+      .cta-section {
+        margin: 2rem 1rem !important;
+        padding: 2rem !important;
+      }
+      
+      /* Fix urgent alert */
+      .urgent-alert {
+        margin: 1rem !important;
+        padding: 1.2rem !important;
+      }
+      
+      .urgent-alert h4 {
+        font-size: 1rem !important;
+      }
+      
+      /* Fix page headers */
+      #page-services > div:first-child,
+      #page-how > div:first-child,
+      #page-about > div:first-child,
+      #page-contact > div:first-child {
+        padding: 5rem 1rem 2rem !important;
+      }
+      
+      /* Fix hero buttons */
+      .hero-content > div {
+        justify-content: center !important;
+      }
+      
+      /* Fix form rows */
+      .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+      
+      /* Fix contact form card */
+      .contact-form-card {
+        padding: 1.5rem !important;
+      }
+      
+      /* Fix footer logo overlap */
+      footer .nav-logo .logo-mark {
+        display: none !important;
+      }
+      
+      footer .nav-logo span {
+        margin-left: 0 !important;
+        font-size: 1.3rem !important;
+        display: block !important;
+        text-align: center !important;
+      }
+      
+      footer .nav-logo {
+        justify-content: center !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .stat-number {
+        font-size: 1.5rem !important;
+      }
+      
+      h1.sh-xl {
+        font-size: 1.8rem !important;
+      }
+      
+      h2.sh-lg {
+        font-size: 1.5rem !important;
+      }
+      
+      .btn {
+        padding: 0.7rem 1.5rem !important;
+        font-size: 0.85rem !important;
+      }
+      
+      .badge {
+        font-size: 0.7rem !important;
+        padding: 0.3rem 0.8rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar - Fixed for Mobile -->
+  <nav id="nav" style="padding: 8px 1.5rem; min-height: 68px; position: relative; overflow: visible;">
+    <div class="nav-logo" onclick="showPage('home')" style="display: flex; align-items: center; gap: 12px; position: relative; z-index: 10;">
+      <!-- Logo hidden on mobile -->
+      <div class="logo-mark" style="width: 300px; height: 300px; background: none; border-radius: 0; padding: 0; position: absolute; top: -115px; left: 0; display: flex; align-items: center; justify-content: center; overflow: visible; z-index: 5;">
+        <img src="cyberguard_icon.svg" alt="CyberGuard Logo"
+             style="width: 300px; height: 300px; object-fit: contain; 
+                    filter: drop-shadow(0 15px 30px rgba(45,122,255,0.9));">
+      </div>
+      <span style="margin-left: 310px; font-weight: 800; font-size: 1.5rem; letter-spacing: -0.03em; line-height: 1; color: white; z-index: 10;">CyberGuard</span>
+    </div>
+   
+    <ul class="nav-links" style="z-index: 10;">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('services')">Services</a></li>
+      <li><a onclick="showPage('how')">How It Works</a></li>
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+      <li><button class="nav-btn" onclick="showPage('contact')">Report Theft</button></li>
+    </ul>
+   
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu" style="z-index: 10;">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+ 
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a onclick="showPage('home'); toggleMenu()">
+      <img src="cyberguard_icon.svg" alt="CyberGuard" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 12px;">
+      Home
+    </a>
+    <a onclick="showPage('services'); toggleMenu()">Services</a>
+    <a onclick="showPage('how'); toggleMenu()">How It Works</a>
+    <a onclick="showPage('about'); toggleMenu()">About</a>
+    <a onclick="showPage('contact'); toggleMenu()">Contact</a>
+    <a onclick="showPage('contact'); toggleMenu()" style="color: #2d7aff; font-weight: 600;">🚨 Report Theft</a>
+  </div>
+
+  <!-- HOME PAGE -->
+  <div id="page-home" class="page active">
+    <div class="hero">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="badge"><span class="badge-dot"></span>Professional Recovery Service</div>
+          <h1>Your Stolen Laptop.<br><span>Can Be Recovered!</span></h1>
+          <p>CyberGuard provides professional evidence collection and recovery assistance for stolen laptops. We help you gather actionable intelligence to share with law enforcement.</p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="showPage('contact')">🚨 Report a Theft</button>
+            <button class="btn btn-outline" onclick="showPage('services')">View Services</button>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%2315171f'/%3E%3Crect x='80' y='80' width='240' height='160' rx='12' fill='%232d7aff' opacity='0.2'/%3E%3Cpath d='M120 140 L280 140 M200 100 L200 200' stroke='%232d7aff' stroke-width='2'/%3E%3Ccircle cx='200' cy='150' r='30' fill='%232d7aff' opacity='0.3'/%3E%3Ctext x='200' y='160' text-anchor='middle' fill='white' font-size='12'%3ELocation Tracking%3C/text%3E%3C/svg%3E" alt="Laptop recovery illustration">
+        </div>
+      </div>
+    </div>
+    
+    <div class="stats-bar">
+      <div class="stats-grid">
+        <div class="stat-item"><div class="stat-number">98%</div><div class="stat-label">Recovery Success</div></div>
+        <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Monitoring Support</div></div>
+        <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Consent-Based</div></div>
+        <div class="stat-item"><div class="stat-number">5min</div><div class="stat-label">Alert Response</div></div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <div class="container">
+        <div class="reveal" style="text-align: center;">
+          <div class="badge" style="margin: 0 auto 1rem;">Our Services</div>
+          <h2 class="sh sh-lg">Complete Laptop Protection</h2>
+          <p class="text-secondary" style="max-width: 600px; margin: 1rem auto 0;">From installation to evidence delivery — we handle the technical side so you can focus on recovery.</p>
+        </div>
+        <div class="service-grid reveal">
+          <div class="service-card" onclick="showPage('services')">
+            <div class="service-icon">🔒</div>
+            <h3>Protection Installation</h3>
+            <p>Professional security system installed with your full consent — silent until activated.</p>
+          </div>
+          <div class="service-card" onclick="showPage('services')">
+            <div class="service-icon">📍</div>
+            <h3>Evidence Collection</h3>
+            <p>Location data, network info, and visual evidence captured after theft declaration.</p>
+          </div>
+          <div class="service-card" onclick="showPage('services')">
+            <div class="service-icon">⚖️</div>
+            <h3>Law Enforcement Support</h3>
+            <p>Formal evidence package formatted for police submission with chain-of-custody.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="urgent-alert reveal">
+        <h4>Laptop Stolen Right Now?</h4>
+        <p>Call us immediately on our 24/7 theft hotline. Do not wait — the sooner we activate your case, the more evidence we can collect. Every hour matters.</p>
+        <div class="urgent-hotline" onclick="showPage('contact')">📞 +92(304)000-8567 - Call Now</div>
+      </div>
+    </div>
+    
+    <div class="cta-section reveal">
+      <h2>Protect Your Laptop Today</h2>
+      <p class="text-secondary">Join thousands of professionals who trust CyberGuard with their devices.</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+        <button class="btn btn-primary" onclick="showPage('contact')">Get Protected →</button>
+        <button class="btn btn-outline" onclick="showPage('how')">How It Works</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES PAGE -->
+  <div id="page-services" class="page">
+    <div style="padding: 6rem 1rem 2rem;">
+      <div class="container">
+        <div class="badge">Services</div>
+        <h1 class="sh sh-xl">Professional Services</h1>
+      </div>
+    </div>
+    <div class="container">
+      <div class="grid-2">
+        <div class="card"><h3>🔐 Protection Installation</h3><p>Our technicians install a secure protection layer with explicit consent. The system remains completely dormant during normal use.</p></div>
+        <div class="card"><h3>🚨 Theft Reporting</h3><p>24/7 dedicated hotline for theft reports. We verify identity and activate evidence collection immediately.</p></div>
+        <div class="card"><h3>📸 Evidence Package</h3><p>Comprehensive evidence including IP geolocation, timestamps, network data, and visual captures.</p></div>
+        <div class="card"><h3>📋 Law Enforcement Ready</h3><p>Formatted evidence packages with chain-of-custody documentation, ready for police submission.</p></div>
+      </div>
+      <div class="grid-3" style="margin: 2rem 0;">
+        <div class="card"><div style="font-size: 2rem; font-weight: 800; color: #2d7aff;">$4.99</div><h3>Personal</h3><p>1 device · Evidence delivery</p><button class="btn btn-outline" style="margin-top: 1rem; width: 100%;" onclick="showPage('contact')">Select</button></div>
+        <div class="card" style="border-color: #2d7aff;"><div style="font-size: 2rem; font-weight: 800; color: #2d7aff;">$12.99</div><h3>Professional</h3><p>3 devices · Priority support</p><button class="btn btn-primary" style="margin-top: 1rem; width: 100%;" onclick="showPage('contact')">Select</button></div>
+        <div class="card"><div style="font-size: 2rem; font-weight: 800; color: #2d7aff;">Custom</div><h3>Enterprise</h3><p>Unlimited devices</p><button class="btn btn-outline" style="margin-top: 1rem; width: 100%;" onclick="showPage('contact')">Contact Sales</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS PAGE -->
+  <div id="page-how" class="page">
+    <div style="padding: 6rem 1rem 2rem;">
+      <div class="container">
+        <div class="badge">Process</div>
+        <h1 class="sh sh-xl">How It Works</h1>
+      </div>
+    </div>
+    <div class="container">
+      <div class="process-steps">
+        <div class="process-step"><div class="step-number">1</div><h4>Consent & Install</h4><p>Sign agreement, we install protection</p></div>
+        <div class="process-step"><div class="step-number">2</div><h4>Dormant Mode</h4><p>System inactive during normal use</p></div>
+        <div class="process-step"><div class="step-number">3</div><h4>Report Theft</h4><p>Contact us, we monitor your device</p></div>
+        <div class="process-step"><div class="step-number">4</div><h4>Evidence Delivered</h4><p>Package ready for law enforcement</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT PAGE -->
+  <div id="page-about" class="page">
+    <div style="padding: 6rem 1rem 2rem;">
+      <div class="container">
+        <div class="badge">About</div>
+        <h1 class="sh sh-xl">Professional Recovery Specialists</h1>
+      </div>
+    </div>
+    <div class="container">
+      <div class="grid-2">
+        <div class="card"><h3>🎯 Our Mission</h3><p>To provide professional, ethical laptop recovery services that respect privacy while delivering actionable evidence.</p></div>
+        <div class="card"><h3>🔐 Privacy First</h3><p>Zero data collection during normal use. Evidence only after verified theft report. Full data deletion on request.</p></div>
+        <div class="card"><h3>⚖️ Legally Compliant</h3><p>All services operate with explicit owner consent and comply with data protection regulations.</p></div>
+        <div class="card"><h3>👥 Expert Team</h3><p>Security professionals dedicated to ethical anti-theft solutions and client support.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div id="page-contact" class="page">
+    <div style="padding: 6rem 1rem 2rem;">
+      <div class="container">
+        <div class="badge">Contact</div>
+        <h1 class="sh sh-xl">Get in Touch</h1>
+      </div>
+    </div>
+    <div class="container">
+      <div class="contact-wrapper">
+        <div>
+          <div class="card">
+            <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0;">
+              <div style="width: 44px; height: 44px; background: rgba(45,122,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center;">📞</div>
+              <div><h4>Theft Hotline (24/7)</h4><p class="text-secondary">+92(304)000-8567</p><p class="text-secondary">+92(309)662-2182</p></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0;">
+              <div style="width: 44px; height: 44px; background: rgba(45,122,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center;">✉️</div>
+              <div><h4>Email Support</h4><p class="text-secondary">supportcyberguard@gmail.com</p></div>
+            </div>
+          </div>
+          <div class="urgent-alert" style="margin-top: 1rem;">
+            <h4>🚨 Laptop Stolen Right Now?</h4>
+            <p>Call our 24/7 hotline immediately. Every hour matters for evidence collection.</p>
+            <div class="urgent-hotline">📞 +92(304)000-8567</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="contact-form-card">
+            <div id="formContent">
+              <h3>Report Theft, Inquiry or New Installation</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <input type="text" placeholder="Full Name" id="fname" oninput="validateName(this)">
+                </div>
+                <div class="form-group">
+                  <input type="tel" placeholder="Phone Number" id="fphone" maxlength="15" oninput="validatePhone(this)">
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="email" placeholder="Email Address" id="femail" oninput="validateEmail(this)">
+              </div>
+              <div class="form-group">
+                <select id="freason">
+                  <option value="">Select reason...</option>
+                  <option value="theft">🚨 Active Theft Report</option>
+                  <option value="install">🔒 New Protection Installation</option>
+                  <option value="question">💬 General Question</option>
+                  <option value="support">🛟 Support Request</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <textarea rows="4" placeholder="Details..." id="fmsg"></textarea>
+              </div>
+              <button class="btn btn-primary" style="width: 100%;" onclick="submitContactForm()">Send Message →</button>
+            </div>
+            <div id="formSuccess" style="display: none; text-align: center; padding: 2rem;">
+              <div style="font-size: 3rem;">✅</div>
+              <h3>Message Sent Successfully</h3>
+              <p>We'll contact you within 24 hours.</p>
+              <button class="btn btn-outline" style="margin-top: 1rem;" onclick="resetContactForm()">Send Another</button>
+            </div>
+            <div id="formError" style="display: none; text-align: center; padding: 2rem;">
+              <div style="font-size: 3rem;">❌</div>
+              <h3>Something Went Wrong</h3>
+              <p>Please try again or call our hotline.</p>
+              <button class="btn btn-outline" style="margin-top: 1rem;" onclick="resetContactForm()">Try Again</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEGAL PAGES -->
+  <div id="page-privacy" class="page">
+    <div class="legal-content">
+      <h1>Privacy Policy</h1>
+      <div class="last-updated">Last Updated: March 28, 2026</div>
+      <p>CyberGuard is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information.</p>
+      <h2>1. Information We Collect</h2>
+      <p><strong>Personal Data:</strong> Name, email, phone number, device identifiers. <strong>Evidence Data:</strong> IP addresses, location data, network information, and visual captures after theft declaration.</p>
+      <h2>2. How We Use Your Information</h2>
+      <p>To provide recovery services, verify ownership, compile evidence packages, and communicate with you. We never sell your data.</p>
+      <h2>3. Data Retention</h2>
+      <p>Evidence data retained for 90 days unless you request earlier deletion.</p>
+      <h2>4. Your Rights</h2>
+      <p>You may access, correct, or delete your data at any time.</p>
+    </div>
+  </div>
+
+  <div id="page-terms" class="page">
+    <div class="legal-content">
+      <h1>Terms of Service</h1>
+      <div class="last-updated">Last Updated: March 28, 2026</div>
+      <p>By using CyberGuard services, you agree to these Terms.</p>
+      <h2>1. Service Description</h2>
+      <p>Laptop protection, theft reporting, evidence collection, and law enforcement support. All services require explicit written consent.</p>
+      <h2>2. Eligibility</h2>
+      <p>You must be the legal owner of any device you register.</p>
+      <h2>3. Consent and Activation</h2>
+      <p>System remains dormant until you report a theft. Evidence collection only begins after identity verification.</p>
+    </div>
+  </div>
+
+  <div id="page-consent" class="page">
+    <div class="legal-content">
+      <h1>Consent Agreement</h1>
+      <div class="last-updated">Last Updated: March 28, 2026</div>
+      <p>This Consent Agreement is between CyberGuard and the device owner.</p>
+      <h2>1. Voluntary Consent</h2>
+      <p>You consent to installation of protection software. It remains dormant during normal use.</p>
+      <h2>2. Activation Conditions</h2>
+      <p>System activates only upon your explicit theft declaration after identity verification.</p>
+      <h2>3. Data Collection Upon Activation</h2>
+      <p>May collect some data. All data encrypted.</p>
+      <h2>4. Data Ownership</h2>
+      <p>All evidence belongs to you. We deliver it securely to you only.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer style="padding: 20px 1rem 15px; position: relative; overflow: visible;">
+    <div class="footer-grid">
+      <div>
+        <div class="nav-logo" style="margin-bottom: 10px; cursor: pointer; position: relative; justify-content: center;" onclick="showPage('home')">
+          <div class="logo-mark" style="display: none;"></div>
+          <span style="font-weight: 800; font-size: 1.3rem; letter-spacing: -0.03em; z-index: 10; display: block; text-align: center;">CyberGuard</span>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Services</h5><ul><li><a onclick="showPage('services')">Protection</a></li><li><a onclick="showPage('services')">Evidence Collection</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('how')">How It Works</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div>
+      <div class="footer-col"><h5>Legal</h5><ul><li><a onclick="showPage('privacy')">Privacy Policy</a></li><li><a onclick="showPage('terms')">Terms of Service</a></li><li><a onclick="showPage('consent')">Consent Agreement</a></li></ul></div>
+    </div>
+    <div class="footer-bottom" style="margin-top: 20px;">
+      <div class="copyright">© 2026 CyberGuard. All rights reserved.</div>
+      <div class="copyright">Professional Recovery Service</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    const WEBSITE_API_URL = window.location.origin;
+    
+    function validateName(input) {
+      input.value = input.value.replace(/[^a-zA-Z\s]/g, '');
+    }
+
+    function validatePhone(input) {
+      input.value = input.value.replace(/[^0-9+\s-]/g, '');
+    }
+
+    function validateEmail(input) {
+      if (input.value.length > 0 && !input.value.includes('@')) {
+        input.style.borderColor = '#ef4444';
+      } else {
+        input.style.borderColor = '';
+      }
+    }
+
+    async function submitContactForm() {
+      const name = document.getElementById('fname').value.trim();
+      const phone = document.getElementById('fphone').value.trim();
+      const email = document.getElementById('femail').value.trim();
+      const reasonSelect = document.getElementById('freason');
+      const reason = reasonSelect.value;
+      const message = document.getElementById('fmsg').value.trim();
+
+      if (!name) {
+        alert("Please enter your full name.");
+        return;
+      }
+      if (!phone) {
+        alert("Please enter your phone number.");
+        return;
+      }
+      if (!email || !email.includes('@')) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+      if (!reason) {
+        alert("Please select a reason.");
+        return;
+      }
+
+      const submitBtn = document.querySelector('#formContent .btn-primary');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '⏳ Sending...';
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch(`${WEBSITE_API_URL}/api/contact`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone, email, reason, message })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          document.getElementById('formContent').style.display = 'none';
+          document.getElementById('formSuccess').style.display = 'block';
+          document.getElementById('formError').style.display = 'none';
+        } else {
+          throw new Error(result.error || 'Submission failed');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('formContent').style.display = 'none';
+        document.getElementById('formError').style.display = 'block';
+      } finally {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }
+    }
+
+    function resetContactForm() {
+      document.getElementById('formContent').style.display = 'block';
+      document.getElementById('formSuccess').style.display = 'none';
+      document.getElementById('formError').style.display = 'none';
+      
+      ['fname', 'fphone', 'femail', 'fmsg'].forEach(id => { 
+        const el = document.getElementById(id); 
+        if (el) el.value = ''; 
+      });
+      
+      const reason = document.getElementById('freason');
+      if (reason) reason.selectedIndex = 0;
+    }
+
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById('page-' + id);
+      if (target) target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburger = document.querySelector('.hamburger');
+      
+      document.addEventListener('click', (e) => {
+        if (mobileMenu && mobileMenu.classList.contains('open')) {
+          if (!mobileMenu.contains(e.target) && !hamburger?.contains(e.target)) {
+            mobileMenu.classList.remove('open');
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

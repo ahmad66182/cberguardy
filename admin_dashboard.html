@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberGuard Admin Dashboard</title>
+
+   <!-- Favicon / Browser Tab Logo -->
+    <link rel="icon" type="image/svg+xml" href="cyberguard_icon.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="cyberguard_icon.svg">
+    <link rel="apple-touch-icon" href="cyberguard_icon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="cyberguard_icon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="cyberguard_icon.svg">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0c12;
+            color: white;
+        }
+
+        /* Navigation */
+        .nav {
+            background: rgba(15, 17, 24, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .nav h2 span {
+            color: #2d7aff;
+        }
+
+        .nav-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logout-btn {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        /* Stats Cards */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: rgba(21, 23, 31, 0.8);
+            border: 1px solid rgba(45, 122, 255, 0.2);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: #2d7aff;
+            transform: translateY(-2px);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2d7aff;
+        }
+
+        .stat-label {
+            color: #a0a8c3;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Table */
+        .table-container {
+            background: rgba(21, 23, 31, 0.8);
+            border-radius: 20px;
+            margin: 0 2rem 2rem;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .table-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .refresh-btn {
+            background: rgba(45, 122, 255, 0.2);
+            color: #2d7aff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .refresh-btn:hover {
+            background: rgba(45, 122, 255, 0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem 1rem;
+            color: #a0a8c3;
+            font-weight: 500;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        td {
+            padding: 1rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+        }
+
+        tr:hover {
+            background: rgba(45, 122, 255, 0.05);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-new {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .status-read {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .view-btn {
+            background: rgba(45, 122, 255, 0.2);
+            color: #2d7aff;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+
+        .view-btn:hover {
+            background: rgba(45, 122, 255, 0.4);
+        }
+
+        .delete-btn {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        .delete-btn:hover {
+            background: rgba(239, 68, 68, 0.4);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #a0a8c3;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #15171f;
+            border-radius: 24px;
+            max-width: 500px;
+            width: 90%;
+            padding: 2rem;
+            border: 1px solid rgba(45, 122, 255, 0.3);
+        }
+
+        .modal-content h3 {
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            color: #a0a8c3;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .modal-btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .modal-btn-primary {
+            background: #2d7aff;
+            color: white;
+        }
+
+        .modal-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .modal-btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            z-index: 2000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <h2>Cyber<span>Guard</span> | Admin Console</h2>
+        <div class="nav-info">
+            <span id="loginTime"></span>
+            <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+        </div>
+    </div>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-icon">📬</div>
+            <div class="stat-number" id="totalCount">0</div>
+            <div class="stat-label">Total Messages</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🆕</div>
+            <div class="stat-number" id="newCount">0</div>
+            <div class="stat-label">Unread Messages</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">📞</div>
+            <div class="stat-number" id="theftCount">0</div>
+            <div class="stat-label">Theft Reports</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-number" id="readCount">0</div>
+            <div class="stat-label">Read Messages</div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div class="table-header">
+            <h3>📋 Contact Messages</h3>
+            <button class="refresh-btn" onclick="loadMessages()">🔄 Refresh</button>
+        </div>
+        <div id="tableContent">
+            <div class="loading">Loading messages...</div>
+        </div>
+    </div>
+
+    <!-- View Message Modal -->
+    <div id="viewModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Message Details</h3>
+            <div id="modalBody"></div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-primary" id="markReadBtn" onclick="markAsRead()">✓ Mark as Read</button>
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <h3>⚠️ Delete Message</h3>
+            <p>Are you sure you want to delete this message?</p>
+            <p style="color: #ef4444; font-size: 0.85rem;">This action cannot be undone.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-danger" id="confirmDeleteBtn">Delete</button>
+                <button class="modal-btn modal-btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = window.location.origin;
+        let currentMessageId = null;
+        let currentMessages = [];
+        const ADMIN_KEY = 'CyberGuard2026!';
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.style.background = type === 'success' ? '#10b981' : '#ef4444';
+            toast.innerHTML = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Check authentication
+        function checkAuth() {
+            if (sessionStorage.getItem('admin_logged_in') !== 'true') {
+                window.location.href = 'admin_login.html';
+                return false;
+            }
+            
+            const loginTime = sessionStorage.getItem('admin_login_time');
+            if (loginTime) {
+                const time = new Date(loginTime).toLocaleString();
+                document.getElementById('loginTime').innerHTML = `🕐 ${time}`;
+            }
+            return true;
+        }
+
+        // Load messages from backend
+        async function loadMessages() {
+            if (!checkAuth()) return;
+
+            const tableContent = document.getElementById('tableContent');
+            tableContent.innerHTML = '<div class="loading">Loading messages...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/admin/contacts`, {
+                    headers: {
+                        'X-Admin-Key': ADMIN_KEY
+                    }
+                });
+
+                if (response.status === 401) {
+                    logout();
+                    return;
+                }
+
+                if (!response.ok) {
+                    throw new Error('Failed to load messages');
+                }
+
+                const data = await response.json();
+                
+                if (data.contacts) {
+                    currentMessages = data.contacts;
+                    renderTable(data.contacts);
+                    updateStats(data.contacts);
+                } else {
+                    tableContent.innerHTML = '<div class="no-data">📭 No messages found</div>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                tableContent.innerHTML = '<div class="no-data">❌ Error loading messages. Make sure server is running.</div>';
+            }
+        }
+
+        // Render table
+        function renderTable(contacts) {
+            const tableContent = document.getElementById('tableContent');
+            
+            if (!contacts || contacts.length === 0) {
+                tableContent.innerHTML = '<div class="no-data">📭 No messages found</div>';
+                return;
+            }
+
+            let html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Reason</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            contacts.forEach(contact => {
+                const date = new Date(contact.timestamp).toLocaleString();
+                const statusClass = contact.status === 'new' ? 'status-new' : 'status-read';
+                const statusText = contact.status === 'new' ? '🆕 New' : '✓ Read';
+                
+                let reasonText = '';
+                if (contact.reason === 'theft') reasonText = '🚨 Theft Report';
+                else if (contact.reason === 'install') reasonText = '🔒 Installation';
+                else if (contact.reason === 'question') reasonText = '💬 Question';
+                else if (contact.reason === 'support') reasonText = '🛟 Support';
+                else reasonText = contact.reason;
+
+                html += `
+                    <tr>
+                        <td>#${contact.id}</td>
+                        <td><strong>${escapeHtml(contact.name)}</strong></td>
+                        <td>${escapeHtml(contact.email)}</td>
+                        <td>${escapeHtml(contact.phone)}</td>
+                        <td>${reasonText}</td>
+                        <td>${date}</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td>
+                            <button class="view-btn" onclick="viewMessage(${contact.id})">📖 View</button>
+                            <button class="delete-btn" onclick="confirmDelete(${contact.id})">🗑️ Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `</tbody></table>`;
+            tableContent.innerHTML = html;
+        }
+
+        // Update statistics
+        function updateStats(contacts) {
+            const total = contacts.length;
+            const newCount = contacts.filter(c => c.status === 'new').length;
+            const readCount = total - newCount;
+            const theftCount = contacts.filter(c => c.reason === 'theft').length;
+            
+            document.getElementById('totalCount').innerText = total;
+            document.getElementById('newCount').innerText = newCount;
+            document.getElementById('readCount').innerText = readCount;
+            document.getElementById('theftCount').innerText = theftCount;
+        }
+
+        // View message details
+        function viewMessage(id) {
+            const contact = currentMessages.find(c => c.id === id);
+            if (!contact) return;
+            
+            currentMessageId = id;
+            
+            const modalBody = document.getElementById('modalBody');
+            const date = new Date(contact.timestamp).toLocaleString();
+            
+            let reasonText = '';
+            if (contact.reason === 'theft') reasonText = '🚨 Active Theft Report';
+            else if (contact.reason === 'install') reasonText = '🔒 New Protection Installation';
+            else if (contact.reason === 'question') reasonText = '💬 General Question';
+            else if (contact.reason === 'support') reasonText = '🛟 Support Request';
+            else reasonText = contact.reason;
+            
+            // Update mark as read button based on status
+            const markBtn = document.getElementById('markReadBtn');
+            if (contact.status === 'read') {
+                markBtn.style.display = 'none';
+            } else {
+                markBtn.style.display = 'block';
+            }
+            
+            modalBody.innerHTML = `
+                <p><strong>Name:</strong> ${escapeHtml(contact.name)}</p>
+                <p><strong>Email:</strong> ${escapeHtml(contact.email)}</p>
+                <p><strong>Phone:</strong> ${escapeHtml(contact.phone)}</p>
+                <p><strong>Reason:</strong> ${reasonText}</p>
+                <p><strong>Date:</strong> ${date}</p>
+                <p><strong>IP Address:</strong> ${contact.ip_address || 'N/A'}</p>
+                <p><strong>Message:</strong><br>${escapeHtml(contact.message || 'No message provided')}</p>
+            `;
+            
+            document.getElementById('viewModal').style.display = 'flex';
+        }
+
+        // Mark message as read
+        async function markAsRead() {
+            if (!currentMessageId) return;
+            
+            try {
+                const response = await fetch(`${API_BASE}/admin/contacts/${currentMessageId}/read`, {
+                    method: 'PUT',
+                    headers: {
+                        'X-Admin-Key': ADMIN_KEY,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    showToast('✓ Message marked as read');
+                    closeModal();
+                    loadMessages();
+                } else {
+                    showToast('❌ Failed to mark as read', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('❌ Network error', 'error');
+            }
+        }
+
+        // Confirm delete
+        function confirmDelete(id) {
+            currentMessageId = id;
+            document.getElementById('deleteModal').style.display = 'flex';
+        }
+
+        // Execute delete
+        async function deleteMessage() {
+            if (!currentMessageId) return;
+            
+            try {
+                const response = await fetch(`${API_BASE}/admin/contacts/${currentMessageId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-Admin-Key': ADMIN_KEY
+                    }
+                });
+                
+                if (response.ok) {
+                    showToast('🗑️ Message deleted successfully');
+                    closeDeleteModal();
+                    loadMessages();
+                } else {
+                    showToast('❌ Failed to delete message', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('❌ Network error', 'error');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('viewModal').style.display = 'none';
+            currentMessageId = null;
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+            currentMessageId = null;
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = 'admin_login.html';
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Auto refresh every 30 seconds
+        let refreshInterval = setInterval(loadMessages, 30000);
+        
+        // Load on page load
+        loadMessages();
+        
+        // Set confirm delete button
+        document.getElementById('confirmDeleteBtn').onclick = deleteMessage;
+        
+        // Cleanup interval on page unload
+        window.addEventListener('beforeunload', () => {
+            if (refreshInterval) clearInterval(refreshInterval);
+        });
+    </script>
+</body>
+</html>
